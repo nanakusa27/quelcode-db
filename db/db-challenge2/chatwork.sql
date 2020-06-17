@@ -1,7 +1,7 @@
 CREATE TABLE users(
     user_id INT(11) NOT NULL AUTO_INCREMENT,
     user_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
     introduce VARCHAR(1000),
     tel_mobile VARCHAR(13),
@@ -23,7 +23,7 @@ CREATE TABLE chatrooms(
     chatroom_id INT(11) NOT NULL AUTO_INCREMENT,
     chatroom_name VARCHAR(100) NOT NULL,
     about VARCHAR(1000),
-    is_send_permission TINYINT(1) NOT NULL DEFAULT 1,
+    is_can_send TINYINT(1) NOT NULL DEFAULT 1,
     is_direct_chat TINYINT(1) NOT NULL DEFAULT 0,
     is_deleted TINYINT(1) NOT NULL DEFAULT 0,
     created_at DATETIME,
