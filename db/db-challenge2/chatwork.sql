@@ -9,7 +9,7 @@ CREATE TABLE users(
     is_deleted TINYINT(1) NOT NULL DEFAULT 0,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
-    PRIMARY KEY(user_id)
+    PRIMARY KEY (user_id)
 );
 
 CREATE TABLE chat_members(
@@ -25,14 +25,16 @@ CREATE TABLE chatrooms(
     chatroom_id INT(11) NOT NULL AUTO_INCREMENT,
     chatroom_name VARCHAR(100) NOT NULL,
     about VARCHAR(1000),
-    is_send_able TINYINT(1) NOT NULL DEFAULT 1,
+    is_sendable TINYINT(1) NOT NULL DEFAULT 1,
     is_direct_chat TINYINT(1) NOT NULL DEFAULT 0,
     is_deleted TINYINT(1) NOT NULL DEFAULT 0,
     created_at DATETIME,
     created_by_user_id INT(11) NOT NULL,
     updated_at DATETIME,
     updated_by_user_id INT(11) NOT NULL,
-    PRIMARY KEY(chatroom_id)
+    PRIMARY KEY (chatroom_id),
+    FOREIGN KEY (created_by_user_id) REFERENCES users(user_id),
+    FOREIGN KEY (updated_by_user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE chats(
@@ -45,8 +47,10 @@ CREATE TABLE chats(
     created_by_user_id INT(11) NOT NULL,
     updated_at DATETIME NOT NULL,
     updated_by_user_id INT(11) NOT NULL,
-    PRIMARY KEY(chat_id),
-    FOREIGN KEY (chatroom_id) REFERENCES chatrooms(chatroom_id)
+    PRIMARY KEY (chat_id),
+    FOREIGN KEY (chatroom_id) REFERENCES chatrooms(chatroom_id),
+    FOREIGN KEY (created_by_user_id) REFERENCES users(user_id),
+    FOREIGN KEY (updated_by_user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE tasks(
@@ -61,6 +65,8 @@ CREATE TABLE tasks(
     created_by_user_id INT(11) NOT NULL,
     updated_at DATETIME NOT NULL,
     updated_by_user_id INT(11) NOT NULL,
-    PRIMARY KEY(task_id),
-    FOREIGN KEY (chatroom_id) REFERENCES chatrooms(chatroom_id)
+    PRIMARY KEY (task_id),
+    FOREIGN KEY (chatroom_id) REFERENCES chatrooms (chatroom_id),
+    FOREIGN KEY (created_by_user_id) REFERENCES users (user_id),
+    FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
 );
