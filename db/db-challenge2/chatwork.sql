@@ -58,7 +58,7 @@ CREATE TABLE tasks(
     chatroom_id INT(11) NOT NULL,
     assign_user_id INT(11) NOT NULL,
     task_content VARCHAR(1000) NOT NULL,
-    deadline DATETIME NOT NULL,
+    deadline DATETIME,
     is_completed TINYINT(1) NOT NULL DEFAULT 0,
     is_deleted TINYINT(1) NOT NULL DEFAULT 0,
     created_at DATETIME NOT NULL,
