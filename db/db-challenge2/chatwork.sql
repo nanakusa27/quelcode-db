@@ -12,15 +12,6 @@ CREATE TABLE users(
     PRIMARY KEY (user_id)
 );
 
-CREATE TABLE chat_members(
-    chatroom_id INT(11) NOT NULL,
-    user_id INT(11) NOT NULL,
-    joined_at DATETIME NOT NULL,
-    PRIMARY KEY(chatroom_id, user_id),
-    FOREIGN KEY (chatroom_id) REFERENCES chatrooms(chatroom_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
-);
-
 CREATE TABLE chatrooms(
     chatroom_id INT(11) NOT NULL AUTO_INCREMENT,
     chatroom_name VARCHAR(100) NOT NULL,
@@ -35,6 +26,15 @@ CREATE TABLE chatrooms(
     PRIMARY KEY (chatroom_id),
     FOREIGN KEY (created_by_user_id) REFERENCES users(user_id),
     FOREIGN KEY (updated_by_user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE chat_members(
+    chatroom_id INT(11) NOT NULL,
+    user_id INT(11) NOT NULL,
+    joined_at DATETIME NOT NULL,
+    PRIMARY KEY(chatroom_id, user_id),
+    FOREIGN KEY (chatroom_id) REFERENCES chatrooms(chatroom_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE chats(
